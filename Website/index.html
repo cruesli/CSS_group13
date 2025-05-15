@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Congress Tweets Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      background-color: #111;
+      color: #f4f4f4;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    header {
+      background-color: #000;
+      padding: 3rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      font-weight: 400;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #ccc;
+      max-width: 700px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    section {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #ffffff;
+      font-size: 1.8rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.5rem;
+      margin-top: 3rem;
+      font-weight: 400;
+    }
+
+    a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .download-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #fff;
+      color: #000;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .download-button:hover {
+      background-color: #ddd;
+    }
+
+    .viz-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: 1px solid #444;
+      border-radius: 10px;
+    }
+
+    .notebook-preview {
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+
+    .notebook-preview h3 {
+      margin-top: 0;
+      color: #fff;
+      font-weight: 400;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+      font-weight: 300;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Congress Tweets Analysis</h1>
+    <p>Exploring Political Discourse on Twitter from 2017 to 2023</p>
+  </header>
+
+  <section>
+    <h2>What is the idea?</h2>
+    <p>
+      We analyze tweets from U.S. Congress members over a 6-year period to understand communication patterns, partisan framing, and topic trends. By treating individual Congress members as nodes and shared topics or interactions as edges, we can explore how discourse spreads and polarizes over time.
+    </p>
+
+    <h2>Goal for End User's Experience</h2>
+    <ul>
+      <li><strong>Interactive Visualization:</strong> A network of Congress members linked by shared topics or hashtags.</li>
+      <li><strong>Insights:</strong> Track how political language and framing evolve around key events like elections or crises.</li>
+      <li><strong>Actionable Outputs:</strong> Identify polarization patterns, party alignment clusters, and communication strategy shifts.</li>
+    </ul>
+
+    <h2>Data Sources</h2>
+    <ul>
+      <li><strong><a href="https://github.com/alexlitel/congresstweets" target="_blank">CongressTweets (GitHub)</a></strong>: Daily JSON files from June 2017 to July 2023</li>
+    </ul>
+    <p>
+      This dataset was selected because of its completeness and daily granularity. It spans <strong>2,197 JSON files</strong>, totaling over <strong>5 million tweets</strong> from verified Congressional accounts. Each tweet includes metadata such as time, text, user, and source.
+    </p>
+
+    <h2>Network & Text Integration</h2>
+    <p>
+      Congress members are represented as nodes. Edges are drawn based on co-occurrence of hashtags, topics, or sentiment similarity. NLP techniques like topic modeling and stance detection are used to extract themes and tone, allowing us to visualize discourse dynamics over time.
+    </p>
+
+    <div class="viz-container">
+      <h2>Sample Visualization</h2>
+      <p style="margin-bottom: 1rem;">
+        A prototype below shows Congress members clustered by political similarity in tweet content. Hover to explore individual accounts and major topics.
+      </p>
+      <img src=""
+           alt="Congress Member Network"
+           style="width: 100%; max-width: 1000px; border-radius: 12px; display: block; margin: 2rem auto;" />
+    </div>
+
+    <h2>Dataset Summary</h2>
+    <ul>
+      <li><strong>Total size</strong>: 2.7 GB (unzipped)</li>
+      <li><strong>Date range</strong>: June 21, 2017 – July 11, 2023</li>
+      <li><strong>Files</strong>: 2,197 JSON files (one per day)</li>
+      <li><strong>Tweets</strong>: 5,068,352</li>
+      <li><strong>Fields</strong>: Id, screen_name, user_id, time, link, text, source</li>
+    </ul>
+
+    <a class="download-button" href="https://github.com/alexlitel/congresstweets" target="_blank">View Dataset</a>
+
+    <h2>Preliminary Insights</h2>
+    <ul>
+      <li>Party-line clustering appears in topic co-occurrence networks</li>
+      <li>Hashtag usage often spikes around major political events</li>
+      <li>Sentiment and framing vary significantly across party lines</li>
+    </ul>
+
+    <h2>Go Behind the Scenes</h2>
+    <div class="notebook-preview">
+      <h3>Explainer Notebook</h3>
+      <ul>
+        <li><a href="" target="_blank">View full analysis in our explainer notebook</a></li>
+        <li><a href="https://github.com/cruesli/CSS_group13" target="_blank">See the code on GitHub</a></li>
+      </ul>
+    </div>
+  </section>
+</body>
+
+</html>
