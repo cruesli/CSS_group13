@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Congress Tweets Analysis</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Glider.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
   <style>
     :root {
       --bg: #10131a;
@@ -30,12 +32,69 @@
     }
 
     header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       background: linear-gradient(90deg, #1e293b 0%, #3b82f6 100%);
-      padding: 3.5rem 2rem 2.5rem 2rem;
-      text-align: center;
+      padding: 0.7rem 1.2rem 0.7rem 1.2rem;
       border-bottom: 1px solid var(--border);
       box-shadow: var(--shadow);
       animation: fadeInDown 1s cubic-bezier(.4,0,.2,1);
+      transition: box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    .header-title-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.1rem;
+    }
+
+    header h1 {
+      font-size: 1.3rem;
+      margin: 0 0 0.1rem 0;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: -1px;
+      animation: popIn 1.2s cubic-bezier(.4,0,.2,1);
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 420px;
+      margin: 0;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-buttons {
+      margin-top: 0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+    .nav-buttons button {
+      background: var(--card-bg);
+      color: var(--accent-light);
+      border: 1px solid var(--accent-light);
+      border-radius: 6px;
+      padding: 0.5rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px 0 rgba(59,130,246,0.08);
+    }
+    .nav-buttons button:hover, .nav-buttons button.active {
+      background: var(--accent-light);
+      color: #fff;
+      box-shadow: 0 4px 16px 0 rgba(59,130,246,0.18);
     }
 
     @keyframes fadeInDown {
@@ -43,28 +102,10 @@
       to { opacity: 1; transform: translateY(0);}
     }
 
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: #fff;
-      font-weight: 700;
-      letter-spacing: -1px;
-      animation: popIn 1.2s cubic-bezier(.4,0,.2,1);
-    }
-
     @keyframes popIn {
       0% { opacity: 0; transform: scale(0.95);}
       80% { opacity: 1; transform: scale(1.03);}
       100% { opacity: 1; transform: scale(1);}
-    }
-
-    header p {
-      font-size: 1.25rem;
-      color: var(--muted);
-      max-width: 700px;
-      margin: 0 auto;
-      font-weight: 400;
-      letter-spacing: 0.2px;
     }
 
     main {
@@ -87,6 +128,12 @@
       opacity: 0;
       transform: translateY(30px);
       animation-fill-mode: forwards;
+      transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s;
+    }
+    .card:hover {
+      transform: translateY(-12px) scale(1.015);
+      box-shadow: 0 8px 32px 0 rgba(59,130,246,0.18), var(--shadow);
+      border-color: var(--accent-light);
     }
     .card:nth-child(1) { animation-delay: 0.2s;}
     .card:nth-child(2) { animation-delay: 0.4s;}
@@ -94,6 +141,8 @@
     .card:nth-child(4) { animation-delay: 0.8s;}
     .card:nth-child(5) { animation-delay: 1s;}
     .card:nth-child(6) { animation-delay: 1.2s;}
+    .card:nth-child(7) { animation-delay: 1.4s;}
+    .card:nth-child(8) { animation-delay: 1.6s;}
 
     @keyframes fadeIn {
       to { opacity: 1; transform: none;}
@@ -164,18 +213,71 @@
       text-align: center;
       margin-top: 1.5rem;
     }
-
-    .viz-container img {
+    .viz-container h2 {
+      text-align: left;
+    }
+    .glider-contain {
+      margin: 0 auto;
+      max-width: 700px;
+      position: relative;
+    }
+    .glider {
+      margin: 0 auto;
+    }
+    .viz-slide-img {
       width: 100%;
-      max-width: 900px;
+      max-width: 700px;
       border-radius: 14px;
       box-shadow: 0 2px 24px 0 rgba(59,130,246,0.10);
-      margin: 2rem auto 0 auto;
+      margin: 0 auto;
       display: block;
       border: 1.5px solid var(--border);
-      animation: fadeIn 1.2s cubic-bezier(.4,0,.2,1) 1.1s both;
+      background: #23283a;
+      min-height: 320px;
+      object-fit: contain;
     }
-
+    .viz-caption {
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin: 1.2rem auto 0 auto;
+      max-width: 650px;
+      min-height: 2.5em;
+      transition: opacity 0.3s;
+    }
+    .glider-prev, .glider-next {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 2.2rem;
+      height: 2.2rem;
+      font-size: 1.3rem;
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      z-index: 2;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px 0 rgba(59,130,246,0.13);
+    }
+    .glider-prev { left: -2.5rem; }
+    .glider-next { right: -2.5rem; }
+    .glider-prev:hover, .glider-next:hover { background: var(--accent-light);}
+    .glider-dots {
+      margin-top: 1.2rem;
+      text-align: center;
+    }
+    .glider-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      margin: 0 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .glider-dot.active { background: var(--accent-light);}
     .notebook-preview {
       background: #151922;
       border: 1px solid var(--border);
@@ -186,73 +288,69 @@
       animation: fadeIn 1.2s cubic-bezier(.4,0,.2,1) 1.3s both;
     }
 
-    .notebook-preview h3 {
+    .notebook-preview h2 {
       margin-top: 0;
       color: var(--accent);
       font-weight: 700;
       font-size: 1.18rem;
     }
 
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        padding: 1rem 0.5rem;
+      }
+      .header-title-group {
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+      .nav-buttons {
+        justify-content: center;
+      }
+      .glider-contain, .viz-slide-img { max-width: 98vw;}
+    }
     @media (max-width: 700px) {
       header h1 { font-size: 2.1rem;}
       main { padding: 0 0.5rem;}
       .card { padding: 1.2rem 0.7rem;}
-      .viz-container img { max-width: 100%;}
+      .viz-container img, .viz-slide-img { max-width: 100%;}
+      .glider-prev, .glider-next { left: 0; right: 0;}
     }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Congress Tweets Analysis</h1>
-    <p>Exploring Political Discourse on Twitter from 2017 to 2023</p>
+    <div class="header-title-group">
+      <h1>Congress Tweets Analysis</h1>
+      <p>Exploring political discourse in Congress through mentions and sentiment</p>
+    </div>
+    <nav class="nav-buttons">
+      <button onclick="scrollToSection('idea-goal')">Idea &amp; Goal</button>
+      <button onclick="scrollToSection('dataset')">Dataset</button>
+      <button onclick="scrollToSection('network')">Mention Network</button>
+      <button onclick="scrollToSection('sentiment')">Sentiment Scoring</button>
+      <button onclick="scrollToSection('analysis')">Analysis</button>
+      <button onclick="scrollToSection('visualizations')">Visualizations</button>
+      <button onclick="scrollToSection('notebook')">Notebook</button>
+    </nav>
   </header>
 
   <main>
-    <section class="card">
-      <h2>What is the idea?</h2>
+    <section class="card" id="idea-goal">
+      <h2>Idea &amp; Goal</h2>
       <p>
-        We analyze tweets from U.S. Congress members over a 6-year period to understand communication patterns, partisan framing, and topic trends. By treating individual Congress members as nodes and shared topics or interactions as edges, we can explore how discourse spreads and polarizes over time.
+        We analyze tweets from every member of the U.S. Congress between 2017 and 2023 to understand how political conversations unfold on Twitter. Our main goal is to reveal who drives the conversation, how sentiment varies, and how these patterns relate to political events and party lines. We do this by building a mention network and applying sentiment analysis.
       </p>
     </section>
 
-    <section class="card">
-      <h2>Goal for End User's Experience</h2>
-      <ul>
-        <li><strong>Interactive Visualization:</strong> A network of Congress members linked by shared topics or hashtags.</li>
-        <li><strong>Insights:</strong> Track how political language and framing evolve around key events like elections or crises.</li>
-        <li><strong>Actionable Outputs:</strong> Identify polarization patterns, party alignment clusters, and communication strategy shifts.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Data Sources</h2>
-      <ul>
-        <li><strong><a href="https://github.com/alexlitel/congresstweets" target="_blank">CongressTweets (GitHub)</a></strong>: Daily JSON files from June 2017 to July 2023</li>
-      </ul>
+    <section class="card" id="dataset">
+      <h2>Public Dataset</h2>
       <p>
-        This dataset was selected because of its completeness and daily granularity. It spans <strong>2,197 JSON files</strong>, totaling over <strong>5 million tweets</strong> from verified Congressional accounts. Each tweet includes metadata such as time, text, user, and source.
+        Our analysis is based on a public dataset from GitHub containing over 5 million tweets posted by U.S. Congress members. The dataset covers 2017–2023 and includes tweet text, user info, and timestamps. We originally considered using the Twitter API to collect tweets from regular users, but due to API limitations, we chose this comprehensive, already-collected dataset.
       </p>
-      <a class="download-button" href="https://github.com/alexlitel/congresstweets" target="_blank">View Dataset</a>
-    </section>
-
-    <section class="card">
-      <h2>Network & Text Integration</h2>
-      <p>
-        Congress members are represented as nodes. Edges are drawn based on co-occurrence of hashtags, topics, or sentiment similarity. NLP techniques like topic modeling and stance detection are used to extract themes and tone, allowing us to visualize discourse dynamics over time.
-      </p>
-    </section>
-
-    <section class="card viz-container">
-      <h2>Sample Visualization</h2>
-      <p style="margin-bottom: 1rem;">
-        A prototype below shows Congress members clustered by political similarity in tweet content. Hover to explore individual accounts and major topics.
-      </p>
-      <img src="" alt="Congress Member Network" />
-    </section>
-
-    <section class="card">
-      <h2>Dataset Summary</h2>
       <ul>
         <li><strong>Total size</strong>: 2.7 GB (unzipped)</li>
         <li><strong>Date range</strong>: June 21, 2017 – July 11, 2023</li>
@@ -260,24 +358,129 @@
         <li><strong>Tweets</strong>: 5,068,352</li>
         <li><strong>Fields</strong>: Id, screen_name, user_id, time, link, text, source</li>
       </ul>
+      <a class="download-button" href="https://github.com/alexlitel/congresstweets" target="_blank">Download Dataset</a>
     </section>
 
-    <section class="card">
-      <h2>Preliminary Insights</h2>
+    <section class="card" id="network">
+      <h2>Mention Network</h2>
+      <p>
+        We construct a mention network where each Congress member is a node. Whenever a member mentions another in a tweet, we draw a directed link between them, weighted by the number of mentions. This network structure helps us detect political bubbles, echo chambers, and identify which members are most central in the conversation.
+      </p>
+    </section>
+
+    <section class="card" id="sentiment">
+      <h2>Sentiment Scoring</h2>
+      <p>
+        To measure the tone of each tweet, we use VADER sentiment analysis. This tool assigns a score from -1 (very negative) to 1 (very positive) for every tweet. By aggregating these scores, we can compare the general positivity or negativity of different members, parties, and time periods.
+      </p>
+    </section>
+
+    <section class="card" id="analysis">
+      <h2>Analysis</h2>
+      <p>
+        Our analysis focuses on how network centrality relates to sentiment, and how these patterns differ across political parties. By comparing tweet sentiment and network position with major U.S. and global events, we can observe how political discourse shifts in response to real-world happenings.
+      </p>
       <ul>
-        <li>Party-line clustering appears in topic co-occurrence networks</li>
-        <li>Hashtag usage often spikes around major political events</li>
-        <li>Sentiment and framing vary significantly across party lines</li>
+        <li>Who are the most central and influential members in the network?</li>
+        <li>How does sentiment differ between parties and over time?</li>
+        <li>Do major events correspond to shifts in sentiment or network structure?</li>
       </ul>
     </section>
 
-    <section class="card notebook-preview">
-      <h3>Go Behind the Scenes</h3>
+    <section class="card viz-container" id="visualizations">
+      <h2>Sample Visualizations</h2>
+      <div class="glider-contain">
+        <button class="glider-prev" aria-label="Previous">&#8592;</button>
+        <div class="glider">
+          <div>
+            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Website/viz_network.png" alt="Congress Member Network" />
+          </div>
+          <div>
+            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Website/viz_sentiment_hist.png" alt="Sentiment Distribution" />
+          </div>
+          <div>
+            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Website/viz_party_sentiment.png" alt="Party Sentiment" />
+          </div>
+        </div>
+        <button class="glider-next" aria-label="Next">&#8594;</button>
+        <div class="glider-dots"></div>
+        <div class="viz-caption" id="viz-caption">
+          The mention network shows which Congress members engage with each other most frequently.
+        </div>
+      </div>
+    </section>
+
+    <section class="card notebook-preview" id="notebook">
+      <h2>Go Behind the Scenes</h2>
       <ul>
-        <li><a href="" target="_blank">View full analysis in our explainer notebook</a></li>
-        <li><a href="https://github.com/cruesli/CSS_group13" target="_blank">See the code on GitHub</a></li>
+        <li>
+          <a href="https://nbviewer.org/github/cruesli/CSS_group13/blob/main/Assignments/CSS%20-%20Final%20Project.ipynb" target="_blank">
+            View full analysis in our explainer notebook (nbviewer)
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/cruesli/CSS_group13" target="_blank">
+            See the code on GitHub
+          </a>
+        </li>
       </ul>
     </section>
   </main>
+  <!-- Glider.js -->
+  <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+  <script>
+    // Smooth scroll for nav buttons
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+      }
+    }
+
+    // Highlight active nav button on scroll
+    const sections = ['idea-goal','dataset','network','sentiment','analysis','visualizations','notebook'];
+    window.addEventListener('scroll', () => {
+      let scrollPos = window.scrollY || window.pageYOffset;
+      let found = false;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sec = document.getElementById(sections[i]);
+        if (sec && scrollPos + 120 >= sec.offsetTop) {
+          document.querySelectorAll('.nav-buttons button').forEach(btn => btn.classList.remove('active'));
+          document.querySelectorAll('.nav-buttons button')[i].classList.add('active');
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        document.querySelectorAll('.nav-buttons button').forEach(btn => btn.classList.remove('active'));
+      }
+    });
+
+    // Glider.js slider for visualizations
+    window.addEventListener('DOMContentLoaded', function(){
+      const captions = [
+        "The mention network shows which Congress members engage with each other most frequently.",
+        "Distribution of sentiment scores for all tweets. Most tweets are neutral, but there are clear positive and negative outliers.",
+        "Average tweet sentiment by party. Democrats, Republicans, and Independents show distinct sentiment patterns."
+      ];
+      const captionEl = document.getElementById('viz-caption');
+      let glider = new Glider(document.querySelector('.glider'), {
+        slidesToShow: 1,
+        dots: '.glider-dots',
+        draggable: true,
+        arrows: {
+          prev: '.glider-prev',
+          next: '.glider-next'
+        }
+      });
+      glider.ele.addEventListener('glider-slide-visible', function(e){
+        captionEl.style.opacity = 0;
+        setTimeout(() => {
+          captionEl.textContent = captions[e.detail.slide];
+          captionEl.style.opacity = 1;
+        }, 200);
+      });
+    });
+  </script>
 </body>
 </html>
