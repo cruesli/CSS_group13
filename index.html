@@ -359,12 +359,13 @@
         <li><strong>Fields</strong>: Id, screen_name, user_id, time, link, text, source</li>
       </ul>
       <a class="download-button" href="https://github.com/alexlitel/congresstweets" target="_blank">Download Dataset</a>
+      <a class="download-button" href="https://github.com/alexlitel/congresstweets-automator" target="_blank">Download Dataset metadata</a>
     </section>
 
     <section class="card" id="network">
       <h2>Mention Network</h2>
       <p>
-        We construct a mention network where each Congress member is a node. Whenever a member mentions another in a tweet, we draw a directed link between them, weighted by the number of mentions. This network structure helps us detect political bubbles, echo chambers, and identify which members are most central in the conversation.
+        We construct a mention network where each Congress member is a node. Whenever a member mentions another in a tweet, we draw a directed link between them. The weight of each link is based on the average sentiment in the textual context surrounding each mention, calculated using a ±10-word window. These sentiment scores are averaged across all instances where one member mentions another, resulting in a directed average sentiment between the two members. This network structure helps us detect political bubbles, echo chambers, and identify which members are most central in the conversation.
       </p>
     </section>
 
