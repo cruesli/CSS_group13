@@ -472,13 +472,13 @@
     window.addEventListener('DOMContentLoaded', function(){
       const captions = [
         "1slide caption: The bar chart compares the mean VADER compound score for each party label in the sample. Democrats (D), Republicans (R), Liberatarians (L), and Independents (I) all cluster between 0.18 and 0.26, signalling slighly positive language overall. Accounts without a part tag (N/A, which are mostly committees or caucuses) show the highest average sentiment, while Indepedents sit lowest. The partisan tone differs, but the gap is modest, nobody is extremely negative or positive",
-        "2slide caption PLACEHOLDER",
-        "3slide caption PLACEHOLDER",
-        "4slide caption PLACEHOLDER",
-        "5slide caption PLACEHOLDER",
+        "2slide caption: Each point represents one congressional account: the x-axis is degree centrality in the mention network and the y-axis is that accounts average tweet sentiment. Colours transition from red (negative) through yellow (neutral) to green (positive). A handful of highly connected figures appear on the right, but their sentiment is still centred near zero.",
+        "3slide caption: This histogram shows how the 300.000 tweet sample spreads across VADER's full -1 to +1 range. The spike at 0 reflects that VADER jugdes it as neutral. Beyond that the curve is right skewed, meaning more tweets land in mildly or strongly positive territory than in the negative tail.",
+        "4slide caption: Blues are Democrats, red nodes Republicans. Node size is proportional to weighted degree. Two dense clusters dominate with only a sprinkling of cross party links. Larger nodes such as @SpeakerPelosi or @SteveScalise mark part leaders and committee chairs who attract the most intra party attention.",
+        "5slide caption: Here the same graph is expanded to include non-member accounts. The picture becomes a hub-and-spoke system. @POTUS, @HouseDemocrats and other institutional handles sit at the centre, pulling both red and blue lawmakers into shared conversations. Party clusters are still visible, but the presence of large grey hubs underlines how much congressional discourse is focused through a few high profile non legislative accounts.",
         "6slide caption PLACEHOLDER",
         "7slide caption PLACEHOLDER"
-      ];
+      ];f
       const captionEl = document.getElementById('viz-caption');
       let glider = new Glider(document.querySelector('.glider'), {
         slidesToShow: 1,
