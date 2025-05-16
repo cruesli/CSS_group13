@@ -393,19 +393,31 @@
         <button class="glider-prev" aria-label="Previous">&#8592;</button>
         <div class="glider">
           <div>
-            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Website/viz_network.png" alt="Congress Member Network" />
+            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Network_full.png" alt="Full Member Network" />
           </div>
           <div>
-            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Website/viz_sentiment_hist.png" alt="Sentiment Distribution" />
+            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Network_congress.png" alt="Congress Member Network" />
           </div>
           <div>
-            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Website/viz_party_sentiment.png" alt="Party Sentiment" />
+            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Distribution_Of_Tweet_sentiment_Scores.png" alt="Distribution_Of_Tweet_sentiment_Scores" />
+          </div>
+          <div>
+            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Average_Tweet_Sentiment_By_Party.png" alt="Average_Tweet_Sentiment_By_Party" />
+          </div>
+          <div>
+            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Centrality_Vs_Sentiment_Of_Congress_Members.png" alt="Centrality_Vs_Sentiment_Of_Congress_Members" />
+          </div>
+          <div>
+            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Network_full_covid.png" alt="Full Member Network Covid" />
+          </div>
+          <div>
+            <img class="viz-slide-img" src="https://raw.githubusercontent.com/cruesli/CSS_group13/main/Network_congress_covid.png" alt="Congress Member Network Covid" />
           </div>
         </div>
         <button class="glider-next" aria-label="Next">&#8594;</button>
         <div class="glider-dots"></div>
         <div class="viz-caption" id="viz-caption">
-          The mention network shows which Congress members engage with each other most frequently.
+          slide caption PLACEHOLDER
         </div>
       </div>
     </section>
@@ -459,9 +471,13 @@
     // Glider.js slider for visualizations
     window.addEventListener('DOMContentLoaded', function(){
       const captions = [
-        "The mention network shows which Congress members engage with each other most frequently.",
-        "Distribution of sentiment scores for all tweets. Most tweets are neutral, but there are clear positive and negative outliers.",
-        "Average tweet sentiment by party. Democrats, Republicans, and Independents show distinct sentiment patterns."
+        "1slide caption PLACEHOLDER",
+        "2slide caption PLACEHOLDER",
+        "3slide caption PLACEHOLDER",
+        "4slide caption PLACEHOLDER",
+        "5slide caption PLACEHOLDER",
+        "6slide caption PLACEHOLDER",
+        "7slide caption PLACEHOLDER"
       ];
       const captionEl = document.getElementById('viz-caption');
       let glider = new Glider(document.querySelector('.glider'), {
